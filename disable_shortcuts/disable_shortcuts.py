@@ -54,11 +54,10 @@ def get(cmd):
 # Get the PID of the currently active window
 def getactive():
     xdoid = get(["xdotool", "getactivewindow"])
-    result = get(["xprop", "-id", xdoid])
-    if not result:
+    if not xdoid:
         return None
 
-    pidline = [l for l in result.splitlines() if "_NET_WM_PID(CARDINAL)" in l]
+    pidline = [l for l in get(["xprop", "-id", xdoid]).splitlines() if "_NET_WM_PID(CARDINAL)" in l]
     if pidline:
         pid = pidline[0].split("=")[1].strip()
     else:

@@ -29,10 +29,14 @@ shortcuts = {
     "org.gnome.desktop.wm.keybindings/begin-resize" : "gsettings",  
     # CTRL + ALT + S
     "org.gnome.desktop.wm.keybindings/toggle-shaded" : "gsettings",
-    # CTRL+ALT+LEFT
+    # CTRL + ALT + LEFT
     "org.gnome.desktop.wm.keybindings/switch-to-workspace-left": "gsettings",
-    # CTRL+ALT+RIGHT
+    # CTRL + ALT + RIGHT
     "org.gnome.desktop.wm.keybindings/switch-to-workspace-right": "gsettings",
+    # CTRL + SHIFT + ALT + RIGHT
+    "org.gnome.desktop.wm.keybindings/move-to-workspace-right":  "gsettings",
+    # CTRL + SHIFT + ALT + LEFT
+    "org.gnome.desktop.wm.keybindings/move-to-workspace-left":  "gsettings",
 }
 
 #
@@ -54,10 +58,11 @@ def get(cmd):
 # Get the PID of the currently active window
 def getactive():
     xdoid = get(["xdotool", "getactivewindow"])
-    if not xdoid:
+    result = get(["xprop", "-id", xdoid])
+    if not result:
         return None
 
-    pidline = [l for l in get(["xprop", "-id", xdoid]).splitlines() if "_NET_WM_PID(CARDINAL)" in l]
+    pidline = [l for l in result.splitlines() if "_NET_WM_PID(CARDINAL)" in l]
     if pidline:
         pid = pidline[0].split("=")[1].strip()
     else:

@@ -2,6 +2,8 @@
 import subprocess
 import time
 import os
+import datetime
+
 
 # Path pattern to block
 apppattern = "pycharm"
@@ -26,11 +28,11 @@ shortcuts = {
     # ALT + F8
     "org.gnome.desktop.wm.keybindings/begin-resize" : "gsettings",  
     # CTRL + ALT + S
-    "org.gnome.desktop.wm.keybindings/toggle-shaded" : "gsettings"
-    # ALT + `
-    # ??
-    # ALT + F1, Super + S
-    # ??
+    "org.gnome.desktop.wm.keybindings/toggle-shaded" : "gsettings",
+    # CTRL+ALT+LEFT
+    "org.gnome.desktop.wm.keybindings/switch-to-workspace-left": "gsettings",
+    # CTRL+ALT+RIGHT
+    "org.gnome.desktop.wm.keybindings/switch-to-workspace-right": "gsettings",
 }
 
 #
@@ -108,8 +110,9 @@ def setkeys(flag):
 # this script crashes at an inopportune time.
 shortcutmap = {}
 if backupfile:
-    f = open(os.path.expanduser(backupfile),'w+') 
+    f = open(os.path.expanduser(backupfile),'a+') 
     f.write('#!/bin/sh\n')
+    f.write(f"#{datetime.datetime.now()}\n")
 
 for key, val in shortcuts.items():
     if shortcuts[key] == "gsettings":
@@ -117,8 +120,9 @@ for key, val in shortcuts.items():
 
         if backupfile:
             if shortcutmap[key]:
-                f.write("gsettings set " + " ".join(key.split("/")) + " " + 
-                shortcutmap[key] + "\n")
+                f.write(f"gsettings set {" ".join(key.split("/"))} \"{shortcutmap[key]}\"\n")
+                # f.write("gsettings set " + " ".join(key.split("/")) + " " + 
+                # shortcutmap[key] + "\n")
             else:
                 f.write("gsettings reset " + " ".join(key.split("/")) + "\n")
     elif shortcuts[key] == "dconf":
@@ -130,7 +134,9 @@ for key, val in shortcuts.items():
             else:
                 f.write("dconf reset " + key + "\n")
 
-if backupfile: f.close()
+if backupfile: 
+    f.write("\n\n")
+    f.close()
 
 # Check every half second if the window changed form or to a 
 # matching application.

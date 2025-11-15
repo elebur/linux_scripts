@@ -21,6 +21,9 @@ A simple bash function for activating Python's virtual environment.
 
 Currently, it looks for the '.venv' folder (hardcoded) in the current directory, and if found, tries activating the environment.
 
+# add_language
+A shortcut for adding languages to the system with one command.
+
 # case_insensitive_terminal_autocompletions
 Makes Bash's autocompletions case-insensitive (e.g. 'desktop' == 'Desktop').
 

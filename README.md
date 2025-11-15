@@ -16,6 +16,11 @@ A set of useful shortcuts for the 'git' command. E.g. `gs` == `git status`, `gd`
 
 Installation instructions are in the script.
 
+# activate_virtual_env
+A simple bash function for activating Python's virtual environment.
+
+Currently, it looks for the '.venv' folder (hardcoded) in the current directory, and if found, tries activating the environment.
+
 # case_insensitive_terminal_autocompletions
 Makes Bash's autocompletions case-insensitive (e.g. 'desktop' == 'Desktop').
 

@@ -1,5 +1,4 @@
 # Add these lines ot ~/.bash_aliases and restart the terminal.
-
 gc () {
     git commit -m "$@";
 }
@@ -20,3 +19,5 @@ gch () {
     git checkout $@; 
 }
 
+alias gs='git status'
+ 

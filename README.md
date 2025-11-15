@@ -3,12 +3,18 @@ Disables system shortcuts while the focus is in a certain application.
 
 See the inner [README](https://github.com/elebur/linux_scripts/blob/main/disable_shortcuts/README.md) for details.
 
-# show_git_branch_in_bash
+# Git
+## show_git_branch_in_bash
 Adds a current git branch at the end of the prompt.
 
 Installation instructions are in the script.
 
 <img width="600" height="69" alt="example" src="https://github.com/user-attachments/assets/75b257c5-65ba-48e1-a277-6cc1304f9d15" />
+
+## shortcuts
+A set of useful shortcuts for the 'git' command. E.g. `gs` == `git status`, `gd` == `git diff`.
+
+Installation instructions are in the script.
 
 # case_insensitive_terminal_autocompletions
 Makes Bash's autocompletions case-insensitive (e.g. 'desktop' == 'Desktop').
